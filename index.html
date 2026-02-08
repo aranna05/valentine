@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine ❤️</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff758c, #ffb199);
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        width: 320px;
+        max-width: 90vw;
+    }
+
+    h1 {
+        margin-bottom: 25px;
+    }
+
+    .buttons {
+        position: relative;
+        height: 140px;
+        margin-top: 10px;
+    }
+
+    button {
+        padding: 14px 26px;
+        font-size: 18px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        position: absolute;
+        transition: transform 0.15s ease, background 0.2s ease;
+    }
+
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+        left: 30px;
+        top: 40px;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.12);
+        background: #e63956;
+    }
+
+    #noBtn {
+        background: #dddddd;
+        color: #333;
+        left: 170px;
+        top: 40px;
+    }
+
+    #message {
+        margin-top: 25px;
+        font-size: 20px;
+        color: #e63956;
+        font-weight: bold;
+        min-height: 48px;
+    }
+
+    #subMessage {
+        margin-top: 12px;
+        font-size: 16px;
+        color: #ff4d6d;
+        font-style: italic;
+        min-height: 40px;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1 id="question">Would you be my Valentine? 💌</h1>
+
+    <div class="buttons" id="buttonArea">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 🙈</button>
+    </div>
+
+    <div id="message"></div>
+    <div id="subMessage"></div>
+</div>
+
+<script>
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const area = document.getElementById('buttonArea');
+const message = document.getElementById('message');
+const subMessage = document.getElementById('subMessage');
+const question = document.getElementById('question');
+
+// FAST smooth escape movement on hover
+function moveNoFast() {
+    const areaRect = area.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+
+    const maxX = areaRect.width - btnRect.width;
+    const maxY = areaRect.height - btnRect.height;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+}
+
+noBtn.addEventListener('mouseenter', moveNoFast);
+noBtn.addEventListener('touchstart', moveNoFast); // mobile
+
+// If NO is clicked/tapped → turn into YES + show romantic line
+noBtn.addEventListener('click', () => {
+    noBtn.innerText = "Yes ❤️";
+    noBtn.style.background = "#ff4d6d";
+    noBtn.style.color = "white";
+    question.innerText = "Are you sure you tapped the right button? 😌";
+
+    subMessage.innerText = "Even when you try to say no, my heart still reads it as yes — because it only understands you. 💖";
+});
+
+// YES click result with pickup line
+yesBtn.addEventListener('click', showLove);
+noBtn.addEventListener('dblclick', showLove);
+
+function showLove() {
+    question.innerText = "Best choice ever 💘";
+    message.innerText = "Are you a Wi‑Fi signal? Because I’m totally feeling the strongest connection with you.";
+    subMessage.innerText = "From this click onward, you’re officially my favorite notification. 💌";
+    yesBtn.style.transform = "scale(1.2)";
+}
+</script>
+
+</body>
+</html>
